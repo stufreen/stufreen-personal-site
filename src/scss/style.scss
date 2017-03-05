@@ -731,7 +731,7 @@ div.contact-form form{
 	padding: 1em 1em 4em 1em;
 }
 
-div.contact-form label{
+div.contact-form span{
 	text-align: right;
 	width: 28%;
 	margin-right:2%;
@@ -779,11 +779,31 @@ input#submit:hover, input#submit:focus{
 	        transform: translate(-0.1em, -0.1em);
 }
 
+.contact-form input, .contact-form textarea{
+	padding: 0.5em;
+	border-radius: 3px;
+	font-family: $scala;
+	font-size: 16px;
+	transition: border 0.5s ease-in-out;
+}
+
 div.contact-form p.form-error{
 	margin: -0.5em 0 1.2em 30%;
 	font-size: 0.7em;
 	font-style: italic;
-	color: #777777;
+	color: $sfred;
+	opacity: 0;
+	transition: opacity 0.5s ease-in-out;
+}
+
+label.error{
+	p.form-error{
+		opacity: 1;
+	}
+
+	input, textarea{
+		border: 1px solid $sfred;
+	}
 }
 
 @-webkit-keyframes pulse {

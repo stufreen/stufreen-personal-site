@@ -13,29 +13,28 @@
 
       <p class="form-title"><a name="form">Get a quote for your project:</a></p>
     
-      <form method="post" action="/#form">
-        <fieldset>
-          <label for="name">Name</label>
-          <input type="text" name="name"/>&nbsp;* 
-        </fieldset>
-        <p class="form-error"></p>
-        
-        <fieldset>
-          <label for="email">E-mail</label>
+      <form method="post" id="contact-form">
+
+        <label id="name">
+          <span>Name</span>
+          <input type="text" name="name"/>&nbsp;*
+          <p class="form-error">Name required</p>
+        </label>
+       
+        <label id="email">
+          <span>E-mail</span>
           <input type="text" name="email"/>&nbsp;* 
-        </fieldset>
-        <p class="form-error"></p>
+          <p class="form-error">Valid email address required</p>
+        </label>
         
-        <fieldset>
-          <label for="description">Describe your project</label>
+        <label id="description">
+          <span>Describe your project</span>
           <textarea type="text" name="description" id="description"></textarea>&nbsp;*
-        </fieldset>
-        <p class="form-error"></p>
+          <p class="form-error">Please enter a description</p>
+        </label>
         
-        <fieldset>
-          <label for="submit">&nbsp;</label>
-          <input type="submit" name="submit" id="submit" value='Send'/>
-        </fieldset>
+        <input type="submit" name="submit" id="submit" value='Send'/>
+
       </form>
     </div><!--end contact-form-->
   </div><!--end container-->
