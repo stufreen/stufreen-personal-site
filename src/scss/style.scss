@@ -243,9 +243,9 @@ div.blurb{
 	width: 100%;
 	background-color: #222830;
 	background-image: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.3) 60%,rgba(0,0,0,0) 100%), url("../img/desk.jpg");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
 
 	@media screen and (min-width: $bp_two+1) {
 		background-attachment: fixed;
@@ -732,20 +732,23 @@ div.contact-form form{
 }
 
 div.contact-form span{
+	display: inline-block;
 	text-align: right;
 	width: 28%;
-	margin-right:2%;
-	float: left;
+	margin-top: 5px;
+	margin-right: 2%;
 	font-size: 0.8em;
+	vertical-align: top;
 }
 
 div.contact-form input, div.contact-form textarea{
-	float: left;
+	display: inline-block;
 	width: 40%;
 	margin-bottom: 0.8em;
 	border: 1px solid #CCCFD5;
 	background-color: #FFFFFF;
 	font-family: sans-serif;
+	vertical-align: top;
 }
 
 div.contact-form textarea#description{
@@ -762,13 +765,20 @@ div.contact-form input#submit{
 	padding: 0.5em;
 	color: #000000;
 	text-decoration: none;
+	cursor: pointer;
 	background-color:#FFFFFF;
 	border-radius:0;
 	border: 0;
+	margin-left: 31%;
 	-webkit-appearance: none;
 	-webkit-border-radius: 0;
 	-webkit-transition: all 0.1s;
 		transition: all 0.1s;
+
+	&:disabled{
+		background-color: #EEE;
+		color: #666;
+	}
 }
 
 input#submit:hover, input#submit:focus{
@@ -788,10 +798,11 @@ input#submit:hover, input#submit:focus{
 }
 
 div.contact-form p.form-error{
-	margin: -0.5em 0 1.2em 30%;
+	margin: -0.5em 0 1.2em 31%;
 	font-size: 0.7em;
-	font-style: italic;
 	color: $sfred;
+	text-transform: uppercase;
+	font-weight: bold;
 	opacity: 0;
 	transition: opacity 0.5s ease-in-out;
 }

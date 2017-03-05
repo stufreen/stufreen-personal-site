@@ -106,8 +106,13 @@ $(document).ready(function(){
         // If everything is ok, submit the form via ajax
         if( !isError )
         {
+            $('input[type="submit"]').prop('disabled', true);
             $.post( "sendmail.php", { name: nameVal, email: emailVal, description: descriptionVal } )
                 .done(function( data ) {
+                    $('#name input').val('');
+                    $('#email input').val('');
+                    $('#description textarea').val('');
+                    $('input[type="submit"]').prop('disabled', false);
                     $('div.success-overlay').css('display', 'block');
                     $('div.success-message').css('display', 'block');
                     $('div.success-overlay').delay(6000).fadeOut(2000);
