@@ -1,0 +1,67 @@
+<div class="work">
+  <h2><a name="work">Work</a></h2>  
+  <div class="container">
+
+    <div class="work-focus">
+      {{#if shortDescription}}
+
+        <a href='{{#if link }}{{ link }}{{ else }}assets/img/works/{{ image }}{{/if}}' {{#if link}}target='_blank'{{/if}}>
+            <img src='assets/img/works/{{bigThumb}}'  alt='{{shortDescription}} &ndash; {{title}}'/>
+        </a>
+        <h3>{{title}}</h3>
+        <p>{{{ contents }}} {{#if link}}<a href='{{link}}' target='_blank'> (Link)</a>{{/if}}</p>
+      
+      {{else}}
+
+        {{#with collections.projects.[0]}}
+          <a href='{{#if link}}{{link}}{{else}}{{path}}{{/if}}' {{#if link}}target='_blank'{{/if}}>
+            <img src='assets/img/works/{{bigThumb}}'  alt='{{shortDescription}} &ndash; {{title}}'/>
+          </a>
+          <h3>{{title}}</h3>
+          <p>{{{ contents }}} {{#if link}}<a href='{{link}}' target='_blank'> (Link)</a>{{/if}}</p>
+        {{/with}}
+
+      {{/if}}
+    </div><!--end work-focus-->
+
+    <div class="work-nav">
+      <div class="swiper-container s0">
+        <div class="swiper-wrapper">
+          {{#each collections.projects}}
+            <div class='swiper-slide'>
+              <a href='{{ path }}#work' class='nav-work group'>
+                <div class='thumb-frame'>
+                  <img src='assets/img/works/{{thumbnail}}' alt='{{shortDescription}} &ndash; {{title}}'/>
+                </div>
+                <h4>{{shortDescription}}</h4>
+                <p>{{title}}</p>
+              </a>
+            </div>
+          {{/each}}
+        </div>
+        <div class="swiper-scrollbar"></div>
+      </div><!--end swiper-container s0-->
+    </div><!--end work-nav-->
+
+  </div><!--end container-->
+</div><!--end work-->
+
+<div class="more-work">
+  <div>
+
+    {{#if next.title }}
+
+      <a href="{{ next.path }}" class="show-more"><p class="more-link">See more work</p></a>
+
+    {{/if}}
+
+    {{#if author }}
+
+      {{#with collections.projects.[0]}}
+        <a href="{{ next.path }}" class="show-more"><p class="more-link">See more work</p></a>
+      {{/with}}
+
+    {{/if}}
+
+  </div>
+</div>
