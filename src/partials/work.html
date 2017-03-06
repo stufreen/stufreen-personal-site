@@ -1,8 +1,8 @@
-<div class="work">
-  <h2><a name="work">Work</a></h2>  
+<div class="work" id="work">
+  <h2>Work</h2>  
   <div class="container">
 
-    <div class="work-focus">
+    <div class="work-focus" id="work-focus">
       {{#if shortDescription}}
 
         <a href='{{#if link }}{{ link }}{{ else }}assets/img/works/{{ image }}{{/if}}' {{#if link}}target='_blank'{{/if}}>
@@ -14,7 +14,7 @@
       {{else}}
 
         {{#with collections.projects.[0]}}
-          <a href='{{#if link}}{{link}}{{else}}{{path}}{{/if}}' {{#if link}}target='_blank'{{/if}}>
+          <a href='{{#if link}}{{link}}{{else}}{{path}}{{/if}}' {{#if link}}target='_blank'{{else}}data-lightbox='true'{{/if}} >
             <img src='assets/img/works/{{bigThumb}}'  alt='{{shortDescription}} &ndash; {{title}}'/>
           </a>
           <h3>{{title}}</h3>
@@ -29,7 +29,7 @@
         <div class="swiper-wrapper">
           {{#each collections.projects}}
             <div class='swiper-slide'>
-              <a href='{{ path }}#work' class='nav-work group'>
+              <a href='{{ path }}#work' load-project class='nav-work group'>
                 <div class='thumb-frame'>
                   <img src='assets/img/works/{{thumbnail}}' alt='{{shortDescription}} &ndash; {{title}}'/>
                 </div>

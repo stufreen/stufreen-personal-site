@@ -13,7 +13,28 @@ var
   concat      = require('gulp-concat'),
   handlebars  = require('handlebars'),
   markdown    = require('metalsmith-markdown'),
-  collections = require('metalsmith-collections');
+  collections = require('metalsmith-collections'),
+  jshint      = require('gulp-jshint'),
+  uglify      = require('gulp-uglify'),
+  babel       = require('gulp-babel');
+
+var paths = {
+  dev: {
+    js: [
+      'src/js/**/*.js'
+    ]
+  },
+  build: {
+    js: 'build/assets/js/'
+  }
+};
+
+//error handler helper for jshint
+function handleError(error){
+    console.log(error.toString());
+    this.emit('end');
+    gutil.beep();
+}
 
 // build HTML files using Metalsmith
 gulp.task('html', function() {
@@ -65,18 +86,32 @@ gulp.task('assets', function() {
     .pipe(gulp.dest('build/assets'));
 });
 
-// Simply copies js folder to build directory
-gulp.task('js', function() {
-  return gulp.src(['src/js/**/*'])
-    .pipe(cleanDest('build/assets/js'))
-    .pipe(gulp.dest('build/assets/js'));
+// Build js with babel and concat
+gulp.task('scripts', ['lint'], function() {
+  return gulp.src(paths.dev.js)
+    .pipe(concat('app.min.js')).on('error', handleError)
+    .pipe(babel({
+        presets: ['es2015']
+    }))
+    .on('error', handleError)
+    .pipe(uglify())
+    .pipe(gulp.dest(paths.build.js));
+});
+
+// Lint js
+gulp.task('lint', function() {
+    return gulp.src(paths.dev.js)
+    .pipe(jshint())
+    .on('error', handleError)
+    .pipe(jshint.reporter('jshint-stylish'))
+    .on('error', handleError);
 });
 
 gulp.task('watch', function() {
     gulp.watch('src/**/*.md', ['html']);
     gulp.watch('src/**/*.html', ['html']);
     gulp.watch('src/**/*.scss', ['styles']);
-    gulp.watch('src/**/*.js', ['js']);
+    gulp.watch('src/**/*.js', ['scripts']);
 });
 
-gulp.task('default', [ 'styles', 'js', 'assets', 'html', 'watch' ]);
+gulp.task('default', [ 'styles', 'scripts', 'assets', 'html', 'watch' ]);

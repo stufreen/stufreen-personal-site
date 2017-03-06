@@ -9,15 +9,21 @@
   "author": "Stu Freen",
   "license": "UNLICENSED",
   "devDependencies": {
+    "babel-preset-es2015": "^6.13.2",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.1",
+    "gulp-babel": "^6.1.2",
     "gulp-clean-css": "^3.0.3",
     "gulp-clean-dest": "^0.2.0",
     "gulp-concat": "^2.6.1",
+    "gulp-jshint": "^2.0.4",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.4.1",
+    "gulp-uglify": "^2.0.1",
     "handlebars": "^4.0.6",
+    "jshint": "^2.9.3",
+    "jshint-stylish": "^2.2.1",
     "jstransformer-handlebars": "^1.0.0",
     "metalsmith": "^2.3.0",
     "metalsmith-assets": "^0.1.0",
@@ -32,5 +38,9 @@
     "metalsmith-permalinks": "^0.5.0",
     "metalsmith-publish": "^0.1.5",
     "metalsmith-word-count": "0.0.4"
+  },
+  "dependencies": {
+    "angular": "^1.6.2",
+    "gsap": "^1.19.1"
   }
 }
