@@ -25,7 +25,7 @@
     </div><!--end work-focus-->
 
     <div class="work-nav">
-      <div class="swiper-container s0">
+      <div class="swiper-container" initialize-swiper>
         <div class="swiper-wrapper">
           {{#each collections.projects}}
             <div class='swiper-slide'>
@@ -40,7 +40,7 @@
           {{/each}}
         </div>
         <div class="swiper-scrollbar"></div>
-      </div><!--end swiper-container s0-->
+      </div><!--end swiper-container-->
     </div><!--end work-nav-->
 
   </div><!--end container-->
@@ -51,14 +51,14 @@
 
     {{#if next.title }}
 
-      <a href="{{ next.path }}" class="show-more"><p class="more-link">See more work</p></a>
+      <a href="{{ next.path }}" class="show-more" id="show-more" load-more-work><p class="more-link">See more work</p></a>
 
     {{/if}}
 
     {{#if author }}
 
       {{#with collections.projects.[0]}}
-        <a href="{{ next.path }}" class="show-more"><p class="more-link">See more work</p></a>
+        <a href="{{ next.path }}" class="show-more" id="show-more" load-more-work><p class="more-link">See more work</p></a>
       {{/with}}
 
     {{/if}}

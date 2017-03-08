@@ -748,11 +748,11 @@ div.contact-form input, div.contact-form textarea{
 	margin-bottom: 0.8em;
 	border: 1px solid #CCCFD5;
 	background-color: #FFFFFF;
-	font-family: sans-serif;
+	font-family: $scala;
 	vertical-align: top;
 }
 
-div.contact-form textarea#description{
+div.contact-form textarea{
 	width: 60%;
 	height: 8em;
 }
@@ -795,26 +795,27 @@ input#submit:hover, input#submit:focus{
 	border-radius: 3px;
 	font-family: $scala;
 	font-size: 16px;
-	transition: border 0.5s ease-in-out;
+	transition: border 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+	box-shadow: inset 0 0 0 1px #FFFFFF;
 }
 
 div.contact-form p.form-error{
 	margin: -0.5em 0 1.2em 31%;
 	font-size: 0.7em;
-	color: $sfred;
-	text-transform: uppercase;
+	color: #DD4444;
 	font-weight: bold;
 	opacity: 0;
 	transition: opacity 0.5s ease-in-out;
 }
 
-label.error{
-	p.form-error{
-		opacity: 1;
-	}
+.ng-submitted {
+	input.ng-invalid, textarea.ng-invalid{
+		border: 1px solid #DD4444;
+		box-shadow: inset 0 0 0 1px #DD4444;
 
-	input, textarea{
-		border: 1px solid $sfred;
+		& + p.form-error{
+			opacity: 1;
+		}
 	}
 }
 
@@ -872,32 +873,31 @@ input:focus, textarea:focus{
 }
 
 div.success-overlay{
-	display: none;
-	position: absolute;
+	display: block;
+	position: fixed;
 	top: 0;
 	left: 0;
 	height: 100%;
 	width: 100%;
 	background-color: #000000;
-	opacity: 0.5;
+	opacity: 0.2;
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
 	position: fixed;
 	z-index: 99;
 }
 
 div.success-message{
-	display: none;
+	display: block;
 	opacity: 1;
 	width: 15em;
 	background-color: rgb(240,240,240);
-	box-shadow: 0 0 5em rgba(0, 0, 0, 0.7);
+	box-shadow: 0 0 5em rgba(0, 0, 0, 0.1);
 	padding: 1.5em 1.5em 2em 1.5em;
-	border-radius: 0.5em;
+	border-radius: 0.2em;
 	position: fixed;
 	top: 50%;
 	left: 50%;
-	margin-left: -9em;
-	margin-top: -4em;
+	transform: translate(-50%, -50%);
 	color: #000000;
 	text-align: center;
 	z-index: 100;
@@ -922,6 +922,7 @@ div.success-message a{
 	font-weight: bold;
 	font-size: 1.3em;
 	color: #405070;
+	cursor: pointer;
 }
 
 div.success-message a:hover{

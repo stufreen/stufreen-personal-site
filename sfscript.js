@@ -48,17 +48,6 @@ $(document).ready(function(){
 
         // Don't follow the link (prevent default link behaviour)
         return false;
-    }); 
-    
-    // Swiper for work section
-    var swiper0 = new Swiper('.s0.swiper-container', {
-        scrollbar: '.swiper-scrollbar',
-        direction: 'vertical',
-        slidesPerView: 4,
-        paginationClickable: true,
-        spaceBetween: 0,
-        mousewheelControl: true,
-        freeMode: true
     });
 
     //Creates scrollReveal instance
