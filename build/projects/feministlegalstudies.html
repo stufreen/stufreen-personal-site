@@ -26,9 +26,8 @@
   <link rel="apple-touch-icon-precomposed" sizes="114x114" href="./images/icon-114.png">
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="./images/icon-144.png">
   
-  <link rel="stylesheet" href="assets/css/style.css" />
-  <link rel="stylesheet" href="assets/vendorcss/swiper.min.css" />
-  <link rel="stylesheet" href="assets/vendorcss/lightbox.css" />
+  <link rel="stylesheet" href="assets/css/style.min.css" />
+  <link rel="stylesheet" href="assets/css/vendor.css" />
   
   <!--[if lt IE 9]>
   <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
@@ -38,7 +37,7 @@
 
   <div class="header">
     <div class="container">
-      <a href="./"><img src="assets/img/header2.png" alt="Stu Freen Design" id="banner"></a>
+      <a href="./"><img src="assets/img/stufreen.svg" alt="Stu Freen Design" id="banner"></a>
     </div><!--end container-->
   </div><!--end header-->
   
@@ -53,7 +52,6 @@
   <div class="container">
     <div class="quote">
       <h4><i>Quality design</i><br/> is something you can feel.</h4>
-      <p>Mid-to-small sized businesses don’t necessarily need to hire an expensive media company to get quality graphic and web design services. Often you just need one go-to guy that you can depend on.</p>
     </div>
   </div><!--end container-->
   </div><!--end blurb-->
@@ -67,14 +65,23 @@
               <img src='assets/img/works/ifls-med.jpg'  alt='Print poster &ndash; Institute for Feminist Legal Studies'/>
           </a>
           <h3>Institute for Feminist Legal Studies</h3>
-          <p><p>Design of a print poster for the Institute for Feminist Legal Studies. Challenges included presenting large blocks of text and several institutional logos while maintaining a visual style.</p>
-   </p>
+          <p>Design of a print poster for the Institute for Feminist Legal Studies. Challenges included presenting large blocks of text and several institutional logos while maintaining a visual style.</p>
+  
         
       </div><!--end work-focus-->
   
       <div class="work-nav">
         <div class="swiper-container" initialize-swiper>
           <div class="swiper-wrapper">
+              <div class='swiper-slide'>
+                <a href='projects/rogers.html#work' load-project class='nav-work group'>
+                  <div class='thumb-frame'>
+                    <img src='assets/img/works/rogers-history-thumb.jpg' alt='Website &ndash; Rogers History'/>
+                  </div>
+                  <h4>Website</h4>
+                  <p>Rogers History</p>
+                </a>
+              </div>
               <div class='swiper-slide'>
                 <a href='projects/cflora.html#work' load-project class='nav-work group'>
                   <div class='thumb-frame'>
@@ -152,7 +159,8 @@
       <a href="https://ca.linkedin.com/pub/stuart-freen/2/1a8/683" target="_blank"><img class="social-icon" src="assets/img/linkedin-icon.png" alt="Linked In icon"/></a>
       <a href="https://twitter.com/stafree" target="_blank"><img class="social-icon" src="assets/img/twitter-icon.png" alt="Twitter icon"/></a>
       <a href="https://www.flickr.com/photos/stafree" target="_blank"><img class="social-icon" src="assets/img/flickr-icon.png" alt="Flickr icon"/></a>
-      <p data-sr='wait 0.2s scale 0%'>A jack of all trades. Stu left his job as a lawyer at a Bay Street law firm in 2015 to follow his passion for design. His undergrad degree in Computing forms the backbone of his programming skills, but that's just the start of it. Equally adept in print design, web development and back-end coding, he has the tools to meet your design needs.</p>
+      <div data-sr='wait 0.2s scale 0%'><p>Design of a print poster for the Institute for Feminist Legal Studies. Challenges included presenting large blocks of text and several institutional logos while maintaining a visual style.</p>
+  </div>
     </div><!--end container-->
   </div><!--end about-->  
   <div class="contact" id="contact" ng-controller="ContactController">
@@ -168,7 +176,7 @@
   
       <div class="contact-form">
   
-        <p class="form-title"><a name="form">Get a quote for your project:</a></p>
+        <p class="form-title"><a name="form">Email Stu</a></p>
       
         <form method="post" 
           name="contact_form"
@@ -193,9 +201,9 @@
           
           <label id="description">
             <div>
-              <span>Describe your project</span>
+              <span>Message</span>
               <textarea type="text" name="description" ng-model="responses.description" required ng-disabled="contactFormSubmitting"></textarea>
-              <p class="form-error">Please enter a description</p>
+              <p class="form-error">Please enter a message</p>
             </div>
           </label>
           
@@ -205,19 +213,15 @@
       </div><!--end contact-form-->
     </div><!--end container-->
   
-    <div class="success-overlay" ng-show="successOverlayOpen" ng-click="successOverlayOpen = false"></div><!--end success-overlay-->
+    <div class="success-overlay" ng-show="successOverlayOpen" ng-click="successOverlayOpen = false" ng-cloak></div><!--end success-overlay-->
   
-    <div class="success-message" ng-show="successOverlayOpen">
+    <div class="success-message" ng-show="successOverlayOpen" ng-cloak>
       <p>Thanks! Your message was sent. Stu will get back to you shortly.</p>
       <a ng-click="successOverlayOpen = false">Okay</a>
     </div><!--end success-message-->
   
   </div><!--end contact-->
-  <script src="assets/vendorjs/angular.min.js"></script>
-  <script src="assets/vendorjs/scrollReveal.min.js"></script>
-  <script src="assets/vendorjs/swiper.min.js"></script>
-  <script src="assets/vendorjs/TweenLite.js"></script>
-  <script src="assets/vendorjs/ScrollToPlugin.js"></script>
+  <script src="assets/js/vendor.js"></script>
   <script src="assets/js/app.min.js"></script>  
 </body>
   

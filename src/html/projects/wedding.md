@@ -7,4 +7,4 @@ shortDescription: Website
 link: http://www.stufreen.com/smithbrown/
 priority: 6
 ---
-This beautiful, responsive, and mobile-friendly wedding website fit the needs for this couple perfectly. Names and details changed for privacy.
+This beautiful, responsive, and mobile-friendly wedding website fit the needs for this couple perfectly. Names and details changed for privacy. [(Link)](http://www.stufreen.com/smithbrown/)

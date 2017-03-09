@@ -7,4 +7,4 @@ shortDescription: Website
 link: http://www.sotosllp.com
 priority: 8
 ---
-Design and maintenance of a mid-sized law firm's website. Stu directly oversaw all aspects of the website including coding and information architecture. Built as a custom Wordpress template.
+Design and maintenance of a mid-sized law firm's website. Stu directly oversaw all aspects of the website including coding and information architecture. Built as a custom Wordpress template. [(Link)](http://www.sotosllp.com)

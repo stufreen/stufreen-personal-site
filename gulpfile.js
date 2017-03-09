@@ -22,10 +22,17 @@ var paths = {
   dev: {
     js: [
       'src/js/**/*.js'
+    ],
+    vendorjs: [
+      'src/vendor/**/*.js'
+    ],
+    vendorcss: [
+      'src/vendor/**/*.css'
     ]
   },
   build: {
-    js: 'build/assets/js/'
+    js: 'build/assets/js/',
+    css: 'build/assets/css/'
   }
 };
 
@@ -71,7 +78,7 @@ gulp.task('html', function() {
 gulp.task('styles', function() {
   return gulp.src('src/scss/*.scss')
     .pipe(sourcemaps.init())
-    .pipe(concat('style.scss'))
+    .pipe(concat('style.min.scss'))
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer("last 3 versions", "> 1%", "ie 9"))
     .pipe(cleanCSS({compatibility: 'ie9'}))
@@ -96,6 +103,21 @@ gulp.task('scripts', ['lint'], function() {
     .on('error', handleError)
     .pipe(uglify())
     .pipe(gulp.dest(paths.build.js));
+});
+
+// Bundle vendor js files
+gulp.task('vendorjs', [], function() {
+  return gulp.src(paths.dev.vendorjs)
+    .pipe(concat('vendor.js')).on('error', handleError)
+    .pipe(uglify())
+    .pipe(gulp.dest(paths.build.js));
+});
+
+// Bundle vendor css files
+gulp.task('vendorcss', [], function() {
+  return gulp.src(paths.dev.vendorcss)
+    .pipe(concat('vendor.css')).on('error', handleError)
+    .pipe(gulp.dest(paths.build.css));
 });
 
 // Lint js

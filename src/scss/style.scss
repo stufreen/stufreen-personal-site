@@ -1,6 +1,10 @@
 @import "reset.scss";
 @import "mixins.scss";
 
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
 /*
  *	WEB FONTS
  */
@@ -292,11 +296,11 @@ div.quote{
 		text-align: center;
 		font-family: $scala;
 		font-style: italic;
-		font-size: 1.2em;
+		font-size: 1.3em;
 		
 		i{
-			font-size: 1.5em;
-			line-height: 1em;
+			font-size: 1.6em;
+			line-height: 1.2em;
 		}
 	}
 	
@@ -403,7 +407,7 @@ div.work-focus{
 	p{
 		font-size: 1.1em;
 		line-height: 1.4em;
-		padding-bottom: 1em;
+		margin-bottom: 1em;
 		width: $page_edge;
 		text-align: left;
 		margin: 0 auto;
@@ -724,7 +728,7 @@ div.contact-form{
 }
 
 div.contact-form p.form-title{
-	text-align: center;
+	margin-left: 32%;
 	font-weight: bold;
 }
 
@@ -744,7 +748,8 @@ div.contact-form span{
 
 div.contact-form input, div.contact-form textarea{
 	display: inline-block;
-	width: 40%;
+	width: 60%;
+	max-width: 200px;
 	margin-bottom: 0.8em;
 	border: 1px solid #CCCFD5;
 	background-color: #FFFFFF;
@@ -754,7 +759,9 @@ div.contact-form input, div.contact-form textarea{
 
 div.contact-form textarea{
 	width: 60%;
+	max-width: none;
 	height: 8em;
+	resize: vertical;
 }
 
 div.contact-form input#submit{
