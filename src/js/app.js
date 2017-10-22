@@ -118,11 +118,16 @@ angular.module('stufreen', [])
           description: $scope.responses.description
         }
       }).then(function mySuccess(response) {
-        console.log(response);
-        $scope.contactFormSubmitting = false;
-        $scope.responses = {};
-        $scope.contact_form.$setPristine();
-        $scope.successOverlayOpen = true;
+        if(response.data == 'true'){
+          $scope.contactFormSubmitting = false;
+          $scope.responses = {};
+          $scope.contact_form.$setPristine();
+          $scope.successOverlayOpen = true;
+        }
+        else{
+          $scope.contactFormSubmitting = false;
+          console.log(response.data);
+        }
       }, function myError(response) {
         $scope.contactFormSubmitting = false;
         console.log(response.data);

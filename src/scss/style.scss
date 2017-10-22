@@ -187,23 +187,6 @@ div.menu{
 	
 	div.container{
 		padding: 0;
-		
-		@media screen and (min-width: $bp_one) {
-			padding: 0;
-		}
-		
-		@media screen and (min-width: $bp_two) {
-			padding: 0;
-		}
-	}
-	
-	a{
-		color: #FFFFFF;
-		text-decoration: none;
-	}
-	
-	ul{
-		list-style-type: none;
 		height: 31px;
 		width: $inner_column;
 		max-width: 100%;
@@ -213,29 +196,31 @@ div.menu{
 		@media screen and (min-width: $bp_one) {
 			height: 37px;
 		}
+	}
+	
+	a{
+		color: #FFFFFF;
+		text-decoration: none;
+		width: 33.333333333%;
+		font-weight: bold;
+		font-size: 15px;
+		padding: 8px 0;
+		margin: 0;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		background-color: $sfred;
+		transition: padding-top 0.4s ease-in-out, background-color 0.4s ease-in-out;
+		display: inline-block;
+		vertical-align: top;
 		
-		li{
-			width: 33.333333333%;
-			font-weight: bold;
-			font-size: 15px;
-			padding: 8px 0;
-			margin: 0;
-			text-transform: uppercase;
-			letter-spacing: 0.1em;
-			background-color: $sfred;
-			-webkit-transition: all 0.4s ease-in-out;
-			display: inline-block;
-			vertical-align: top;
-			
-			@media screen and (min-width: $bp_one) {
-				font-size: 17px;
-				padding: 10px 0;
-			}
-			
-			&:hover{
-				padding-top: 15px;
-				background-color: lighten($sfred, 8%);
-			}
+		@media screen and (min-width: $bp_one) {
+			font-size: 17px;
+			padding: 10px 0;
+		}
+		
+		&:hover{
+			padding-top: 15px;
+			background-color: lighten($sfred, 8%);
 		}
 	}
 }
@@ -647,7 +632,7 @@ div.about{
 	}
 
 	a{
-		color: white;
+		color: white !important;
 		font-weight: bold;
 		text-decoration: underline;
 	}
