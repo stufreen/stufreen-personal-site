@@ -1,41 +1,34 @@
 <div class="work" id="work">
   <h2>Work</h2>  
   <div class="container">
-
     <div class="work-focus" id="work-focus">
-      {{#if shortDescription}}
-
-        <a href='{{#if link }}{{ link }}{{ else }}assets/img/works/{{ image }}{{/if}}' {{#if link}}target='_blank'{{/if}}>
-            <img src='assets/img/works/{{bigThumb}}'  alt='{{shortDescription}} &ndash; {{title}}'/>
-        </a>
-        <h3>{{title}}</h3>
-        {{{ contents }}}
-      
-      {{else}}
-
-        {{#with collections.projects.[0]}}
-          <a href='{{#if link}}{{link}}{{else}}{{path}}{{/if}}' {{#if link}}target='_blank'{{else}}data-lightbox='true'{{/if}} >
+      {{#each collections.projects}}
+        <div
+          class="work-focus-item {{#if @first}}desktop-show mobile-show{{/if}}"
+          data-project-key="project-{{@index}}"
+        >
+          <a href='{{#if link }}{{ link }}{{ else }}assets/img/works/{{ image }}{{/if}}' {{#if link}} target='_blank' {{/if}}>
             <img src='assets/img/works/{{bigThumb}}'  alt='{{shortDescription}} &ndash; {{title}}'/>
           </a>
           <h3>{{title}}</h3>
           {{{ contents }}}
-        {{/with}}
-
-      {{/if}}
-    </div><!--end work-focus-->
+        </div>
+      {{/each}}
+    </div>
+    <!--end work-focus-->
 
     <div class="work-nav">
-      <div class="swiper-container" initialize-swiper>
+      <div class="swiper-container" id="work-swiper">
         <div class="swiper-wrapper">
           {{#each collections.projects}}
             <div class='swiper-slide'>
-              <a href='{{ path }}#work' load-project class='nav-work group'>
+              <button class='nav-work group load-project-link' data-project-key="project-{{@index}}">
                 <div class='thumb-frame'>
                   <img src='assets/img/works/{{thumbnail}}' alt='{{shortDescription}} &ndash; {{title}}'/>
                 </div>
                 <h4>{{shortDescription}}</h4>
                 <p>{{title}}</p>
-              </a>
+              </button>
             </div>
           {{/each}}
         </div>
@@ -48,20 +41,6 @@
 
 <div class="more-work">
   <div>
-
-    {{#if next.title }}
-
-      <a href="{{ next.path }}" class="show-more" id="show-more" load-more-work><p class="more-link">See more work</p></a>
-
-    {{/if}}
-
-    {{#if author }}
-
-      {{#with collections.projects.[0]}}
-        <a href="{{ next.path }}" class="show-more" id="show-more" load-more-work><p class="more-link">See more work</p></a>
-      {{/with}}
-
-    {{/if}}
-
+    <button id="load-more-button" class="show-more more-link">See more work</button>
   </div>
 </div>

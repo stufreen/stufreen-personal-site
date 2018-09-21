@@ -1,105 +1,90 @@
-angular.module('stufreen', [])
+function initializeSwiper(idName) {
+  const swiperElement = document.getElementById(idName);
+  new Swiper(swiperElement, {
+    scrollbar: '.swiper-scrollbar',
+    direction: 'vertical',
+    slidesPerView: 4,
+    paginationClickable: true,
+    spaceBetween: 0,
+    mousewheelControl: true,
+    freeMode: true
+  });
+}
 
-.directive('smoothScroll', [function() {
-  return {
-    link: function($scope, $element, $attributes){
-      var target = $attributes.href;
-      $element.on('click', function(e){
-        if(target.charAt(0) == '#'){
-          e.preventDefault();
-          TweenLite.to(window, 1.2, {scrollTo:{y:target, offsetY:30}, ease: Power2.easeInOut});
+function initializeSmoothScroll() {
+  const smoothScrollLinks = document.getElementsByClassName('smooth-scroll');
+  Array.prototype.forEach.call(smoothScrollLinks, (el) => {
+    const target = el.getAttribute('href');
+    el.addEventListener('click', (e) => {
+      if (target.charAt(0) === '#') {
+        e.preventDefault();
+        TweenLite.to(
+          window,
+          1.2, 
+          { scrollTo: { y: target, offsetY: 30 }, ease: Power2.easeInOut }
+        );
+      }
+    });
+  });
+}
+
+function initializeLoadProjectButtons() {
+  const loadProjectButtons = document.getElementsByClassName('load-project-link');
+  const projectPanels = document.getElementsByClassName('work-focus-item');
+
+  Array.prototype.forEach.call(loadProjectButtons, (el) => {
+    el.addEventListener('click', (e) => {
+      // Hide all of the project panels that don't match the project key
+      Array.prototype.forEach.call(projectPanels, (projectPanel) => {
+        if (projectPanel.dataset.projectKey === el.dataset.projectKey) {
+          projectPanel.classList.add('desktop-show');
+        } else {
+          projectPanel.classList.remove('desktop-show');
         }
       });
+    });
+  });
+}
+
+function initializeLoadMoreButton() {
+  // Mobile load more button
+  const loadMoreButton = document.getElementById('load-more-button');
+  const projectPanels = document.getElementsByClassName('work-focus-item');
+  const sortedPanels = Array.from(projectPanels).sort();
+
+  let visibleIndex = 0;
+  loadMoreButton.addEventListener('click', (e) => {
+    visibleIndex++;
+    sortedPanels[visibleIndex].classList.add('mobile-show');
+    if (visibleIndex === sortedPanels.length - 1) {
+      loadMoreButton.classList.add('hide');
     }
-  };
-}])
+  });
+}
 
-.directive('loadProject', ['$http', function($http) {
-  return {
-    link: function($scope, $element, $attributes){
-      var target = $attributes.href;
-      $element.on('click', function(e){
-        var path = $attributes.href;
+function initializeScrollReveal() {
+  window.sr = new scrollReveal({
+    mobile: true
+  });
+}
 
-        // Go fetch the target page, and replace our work-focus with that one
-        $http.get(path)
-          .then(function( response ) {
-            var oldWorkFocus = document.getElementById('work-focus');
-            var parser = new DOMParser();
-            var doc = parser.parseFromString(response.data, 'text/html');
-            var newWorkFocus = doc.getElementById('work-focus');
-            oldWorkFocus.replaceWith(newWorkFocus);
-          });
+(function () {
+  initializeSwiper('work-swiper');
+  initializeSmoothScroll();
+  initializeScrollReveal();
+  initializeLoadProjectButtons();
+  initializeLoadMoreButton();
+})();
 
-        // Don't follow the link (prevent default link behaviour)
-        e.preventDefault();
-      });
-    }
-  };
-}])
 
-.directive('loadMoreWork', ['$http', '$compile', function($http, $compile) {
-  return {
-    link: function($scope, $element, $attributes){
-      var target = $attributes.href;
-      var container = $element.parent();
-      $element.on('click', function(e){
-        var path = $attributes.href;
+/////
+////
+//
+//
+//
+///
 
-        // Go fetch the target page
-        $http.get(path)
-          .then(function( response ) {
-            // Parse the response
-            var parser = new DOMParser();
-            var doc = parser.parseFromString(response.data, 'text/html');
-
-            // Prepend the work focus from that page
-            var newWorkFocus = doc.getElementById('work-focus');
-            container.append(newWorkFocus);
-
-            // Replace more work with the more-work from that page
-            $element.remove();
-            var newShowMore = doc.getElementById('show-more');
-            if( newShowMore !== null){
-              container.append(newShowMore);
-              $compile(newShowMore)($scope);
-            }
-          });
-
-        // Don't follow the link (prevent default link behaviour)
-        e.preventDefault();
-      });
-    }
-  };
-}])
-
-.directive('initializeSwiper', [function() {
-  return {
-    link: function($scope, $element, $attributes){
-      var swiper0 = new Swiper($element[0], {
-        scrollbar: '.swiper-scrollbar',
-        direction: 'vertical',
-        slidesPerView: 4,
-        paginationClickable: true,
-        spaceBetween: 0,
-        mousewheelControl: true,
-        freeMode: true
-      });
-    }
-  };
-}])
-
-.directive('initializeScrollReveal', [function() {
-  return {
-    link: function($scope, $element, $attributes){
-      //Creates scrollReveal instance
-      var srconfig = {
-          mobile: true
-      };
-      window.sr = new scrollReveal(srconfig);
-    }
-  };
-}])
+angular.module('stufreen', [])
 
 .controller('ContactController', ['$scope', '$http', function($scope, $http){
 
