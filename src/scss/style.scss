@@ -633,7 +633,7 @@ div.about{
 		width: 80%;
 		max-width: 15em;
 		max-height: 15.02351097178683em;
-		padding-bottom: 1.5em;
+		margin-bottom: 1.5em;
 	}
 	
 	img.social-icon{
@@ -653,6 +653,10 @@ div.about{
 		font-weight: bold;
 		text-decoration: underline;
 	}
+}
+
+.stu-photo {
+	border-radius: 100%;
 }
 
 /*

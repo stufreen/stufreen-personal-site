@@ -37,7 +37,7 @@ var paths = {
 //error handler helper for jshint
 function handleError(error){
     console.log(error.toString());
-    this.emit('end');
+    // this.emit('end');
     gutil.beep();
 }
 
@@ -98,7 +98,7 @@ gulp.task('scripts', ['lint'], function() {
     .pipe(babel({
         presets: ['es2015']
     }))
-    .on('error', handleError)
+    .on('error', console.error)
     .pipe(uglify())
     .pipe(gulp.dest(paths.build.js));
 });
@@ -114,7 +114,8 @@ gulp.task('vendorjs', [], function() {
 // Bundle vendor css files
 gulp.task('vendorcss', [], function() {
   return gulp.src(paths.dev.vendorcss)
-    .pipe(concat('vendor.css')).on('error', handleError)
+    .pipe(concat('vendor.css'))
+    .on('error', handleError)
     .pipe(gulp.dest(paths.build.css));
 });
 
