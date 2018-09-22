@@ -135,3 +135,5 @@ gulp.task('watch', function() {
 });
 
 gulp.task('default', [ 'styles', 'scripts', 'assets', 'html', 'watch' ]);
+
+gulp.task('build', [ 'styles', 'scripts', 'assets', 'html', 'vendorjs', 'vendorcss' ]);
