@@ -1,3 +1,42 @@
+const loadMoreButton = document.getElementById('load-more-button');
+const projectPanels = document.getElementsByClassName('work-focus-item');
+const loadProjectButtons = document.getElementsByClassName('load-project-link');
+const contactForm = document.getElementById('contact-form');
+const successOverlay = document.getElementById('success-overlay');
+const successMessage = document.getElementById('success-message');
+const successMessageCloser = document.getElementById('success-message-closer');
+
+const handleLoadProject = (el) => {
+  el.addEventListener('click', (e) => {
+    // Hide all of the project panels that don't match the project key
+    Array.prototype.forEach.call(projectPanels, (projectPanel) => {
+      if (projectPanel.dataset.projectKey === el.dataset.projectKey) {
+        projectPanel.classList.add('desktop-show');
+      } else {
+        projectPanel.classList.remove('desktop-show');
+      }
+    });
+  });
+};
+
+const handleFormSubmit = (e) => {
+  console.log(e);
+  e.preventDefault();
+
+  const formData = new FormData(contactForm);
+
+  fetch('https://mailthis.to/stufreen@gmail.com', {
+    method: "POST",
+    mode: "cors",
+    body: formData,
+  }).then((res) => {
+    console.log(res);
+    successMessage.classList.add('show');
+    successOverlay.classList.add('show');
+    contactForm.reset();
+  });
+};
+
 function initializeSwiper(idName) {
   const swiperElement = document.getElementById(idName);
   new Swiper(swiperElement, {
@@ -29,29 +68,11 @@ function initializeSmoothScroll() {
 }
 
 function initializeLoadProjectButtons() {
-  const loadProjectButtons = document.getElementsByClassName('load-project-link');
-  const projectPanels = document.getElementsByClassName('work-focus-item');
-
-  Array.prototype.forEach.call(loadProjectButtons, (el) => {
-    el.addEventListener('click', (e) => {
-      // Hide all of the project panels that don't match the project key
-      Array.prototype.forEach.call(projectPanels, (projectPanel) => {
-        if (projectPanel.dataset.projectKey === el.dataset.projectKey) {
-          projectPanel.classList.add('desktop-show');
-        } else {
-          projectPanel.classList.remove('desktop-show');
-        }
-      });
-    });
-  });
+  Array.prototype.forEach.call(loadProjectButtons, handleLoadProject);
 }
 
 function initializeLoadMoreButton() {
-  // Mobile load more button
-  const loadMoreButton = document.getElementById('load-more-button');
-  const projectPanels = document.getElementsByClassName('work-focus-item');
   const sortedPanels = Array.from(projectPanels).sort();
-
   let visibleIndex = 0;
   loadMoreButton.addEventListener('click', (e) => {
     visibleIndex++;
@@ -68,56 +89,19 @@ function initializeScrollReveal() {
   });
 }
 
+function initializeContactForm() {
+  contactForm.addEventListener('submit', handleFormSubmit);
+  successMessageCloser.addEventListener('click', () => {
+    successMessage.classList.remove('show');
+    successOverlay.classList.remove('show');
+  });
+}
+
 (function () {
   initializeSwiper('work-swiper');
   initializeSmoothScroll();
   initializeScrollReveal();
   initializeLoadProjectButtons();
   initializeLoadMoreButton();
+  initializeContactForm();
 })();
-
-
-/////
-////
-//
-//
-//
-///
-
-angular.module('stufreen', [])
-
-.controller('ContactController', ['$scope', '$http', function($scope, $http){
-
-  $scope.responses = {};
-  $scope.successOverlayOpen = false;
-
-  $scope.submitContactForm = function(valid){
-    if(valid){
-      $scope.contactFormSubmitting = true;
-      $http({
-        method : "POST",
-        url : 'sendmail.php',
-        data : {
-          name: $scope.responses.name, 
-          email: $scope.responses.email, 
-          description: $scope.responses.description
-        }
-      }).then(function mySuccess(response) {
-        if(response.data == 'true'){
-          $scope.contactFormSubmitting = false;
-          $scope.responses = {};
-          $scope.contact_form.$setPristine();
-          $scope.successOverlayOpen = true;
-        }
-        else{
-          $scope.contactFormSubmitting = false;
-          console.log(response.data);
-        }
-      }, function myError(response) {
-        $scope.contactFormSubmitting = false;
-        console.log(response.data);
-      });
-    }
-  };
-
-}]);
