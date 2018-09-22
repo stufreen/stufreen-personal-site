@@ -1,5 +1,5 @@
 # stufreen-personal-site
-Personal website for Stu Freen. Static site generator built with Metalsmith and Sass. Builds with npm and Gulp and is configured for CI with Circle CI.
+Personal website for Stu Freen. Static site generator built with Metalsmith and Sass. Builds with npm and Gulp and is configured for Circle CI.
 
 ## Installation
 Start `gulp watch` with:
