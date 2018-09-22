@@ -7,7 +7,7 @@ const successMessage = document.getElementById('success-message');
 const successMessageCloser = document.getElementById('success-message-closer');
 
 const handleLoadProject = (el) => {
-  el.addEventListener('click', (e) => {
+  el.addEventListener('click', () => {
     // Hide all of the project panels that don't match the project key
     Array.prototype.forEach.call(projectPanels, (projectPanel) => {
       if (projectPanel.dataset.projectKey === el.dataset.projectKey) {
@@ -26,8 +26,8 @@ const handleFormSubmit = (e) => {
   const formData = new FormData(contactForm);
 
   fetch('https://mailthis.to/stufreen@gmail.com', {
-    method: "POST",
-    mode: "cors",
+    method: 'POST',
+    mode: 'cors',
     body: formData,
   }).then((res) => {
     console.log(res);
@@ -74,7 +74,7 @@ function initializeLoadProjectButtons() {
 function initializeLoadMoreButton() {
   const sortedPanels = Array.from(projectPanels).sort();
   let visibleIndex = 0;
-  loadMoreButton.addEventListener('click', (e) => {
+  loadMoreButton.addEventListener('click', () => {
     visibleIndex++;
     sortedPanels[visibleIndex].classList.add('mobile-show');
     if (visibleIndex === sortedPanels.length - 1) {
