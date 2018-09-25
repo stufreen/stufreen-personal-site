@@ -959,3 +959,14 @@ div.success-message button{
 		color: #5586C0;
 	}
 }
+
+.scroll-reveal{
+	opacity: 0;
+	transform: translateY(1%) scale(0.96);
+	transition: all 1s ease-out;
+
+	&.show {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+}

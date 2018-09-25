@@ -5,6 +5,7 @@ const contactForm = document.getElementById('contact-form');
 const successOverlay = document.getElementById('success-overlay');
 const successMessage = document.getElementById('success-message');
 const successMessageCloser = document.getElementById('success-message-closer');
+const scrollRevealEls = document.getElementsByClassName('scroll-reveal');
 
 const handleLoadProject = (el) => {
   el.addEventListener('click', () => {
@@ -20,7 +21,6 @@ const handleLoadProject = (el) => {
 };
 
 const handleFormSubmit = (e) => {
-  console.log(e);
   e.preventDefault();
 
   const formData = new FormData(contactForm);
@@ -29,13 +29,45 @@ const handleFormSubmit = (e) => {
     method: 'POST',
     mode: 'cors',
     body: formData,
-  }).then((res) => {
-    console.log(res);
+  }).then(() => {
     successMessage.classList.add('show');
     successOverlay.classList.add('show');
     contactForm.reset();
   });
 };
+
+const calcCoverage = (windowHeight, bb) => {
+  const elHeight = bb.bottom - bb.top;
+  
+  if (bb.top > 0 && bb.bottom < windowHeight) {
+    return 1;
+  } else if (bb.top > 0 && bb.top < windowHeight) {
+    const visiblePart = windowHeight - bb.top;
+    return visiblePart / elHeight;
+  } else if (bb.bottom > 0 & bb.bottom < windowHeight) {
+    const visiblePart = bb.bottom;
+    return visiblePart / elHeight;
+  }
+  return 0;
+};
+
+function checkElementsInView(els, inViewCallback) {
+  const windowHeight = window.innerHeight;
+  Array.prototype.forEach.call(els, (el) => {
+    const bb = el.getBoundingClientRect();
+    const coverage = calcCoverage(windowHeight, bb);
+    if (coverage > 0.2) {
+      inViewCallback(el);
+    }
+  });
+}
+
+function revealElement(el) {
+  const delay = parseInt(el.dataset.srDelay) || 0;
+  setTimeout(() => {
+    el.classList.add('show');
+  }, delay);
+}
 
 function initializeSwiper(idName) {
   const swiperElement = document.getElementById(idName);
@@ -84,8 +116,9 @@ function initializeLoadMoreButton() {
 }
 
 function initializeScrollReveal() {
-  window.sr = new scrollReveal({
-    mobile: true
+  checkElementsInView(scrollRevealEls, revealElement); // on startup
+  window.addEventListener('scroll', () => {
+    checkElementsInView(scrollRevealEls, revealElement);
   });
 }
 

@@ -12,5 +12,10 @@
   "quotmark": "single",
   "undef": true,
   "unused": true,
-  "eqnull": true
+  "eqnull": true,
+  "globals": {
+    "Swiper": true,
+    "TweenLite": true,
+    "Power2": true
+  }
 }
