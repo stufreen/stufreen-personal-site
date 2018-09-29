@@ -30,7 +30,7 @@ const handleFormSubmit = (e) => {
     formObject[key] = value;
   });
 
-  fetch('https://t7o3lghlab.execute-api.us-east-1.amazonaws.com/Production', {
+  fetch('https://t7o3lghlab.execute-api.us-east-1.amazonaws.com/Production/contact-form', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
