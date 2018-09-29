@@ -25,15 +25,24 @@ const handleFormSubmit = (e) => {
 
   const formData = new FormData(contactForm);
 
-  fetch('https://mailthis.to/stufreen@gmail.com', {
+  const formObject = {};
+  formData.forEach((value, key) => {
+    formObject[key] = value;
+  });
+
+  fetch('https://t7o3lghlab.execute-api.us-east-1.amazonaws.com/Production', {
     method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
     mode: 'cors',
-    body: formData,
+    body: JSON.stringify(formObject),
   }).then(() => {
     successMessage.classList.add('show');
     successOverlay.classList.add('show');
     contactForm.reset();
-  });
+  }).catch(console.error);
 };
 
 const calcCoverage = (windowHeight, bb) => {
