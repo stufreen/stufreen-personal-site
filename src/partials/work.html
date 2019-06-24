@@ -7,7 +7,7 @@
           class="work-focus-item {{#if @first}}desktop-show mobile-show{{/if}}"
           data-project-key="project-{{@index}}"
         >
-          <a href='{{#if link }}{{ link }}{{ else }}assets/img/works/{{ image }}{{/if}}' {{#if link}} target='_blank' {{/if}}>
+          <a href='{{#if link }}{{ link }}{{ else }}assets/img/works/{{ image }}{{/if}}' {{#if link}} target='_blank' rel="noreferrer" {{/if}}>
             <img src='assets/img/works/{{bigThumb}}'  alt='{{shortDescription}} &ndash; {{title}}'/>
           </a>
           <h3>{{title}}</h3>
