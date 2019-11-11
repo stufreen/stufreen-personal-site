@@ -1,5 +1,5 @@
 ---
-title: Stu Freen | Creative Developer
+title: Stu Freen | Web Developer
 author: Stu Freen
 description: Toronto-based web developer focussed on building great user experiences.
 layout: page.html

@@ -196,6 +196,7 @@ div.menu{
 		transition: padding-top 0.4s ease-in-out, background-color 0.4s ease-in-out;
 		display: inline-block;
 		vertical-align: top;
+		z-index: 1;
 		
 		@media screen and (min-width: $bp_one) {
 			font-size: 17px;
