@@ -33,43 +33,19 @@ const handleFormSubmit = (e) => {
   fetch('https://t7o3lghlab.execute-api.us-east-1.amazonaws.com/prod/contact', {
     method: 'POST',
     headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     },
     mode: 'cors',
     body: JSON.stringify(formObject),
-  }).then(() => {
-    successMessage.classList.add('show');
-    successOverlay.classList.add('show');
-    contactForm.reset();
-  }).catch(console.error);
+  })
+    .then(() => {
+      successMessage.classList.add('show');
+      successOverlay.classList.add('show');
+      contactForm.reset();
+    })
+    .catch(console.error);
 };
-
-const calcCoverage = (windowHeight, bb) => {
-  const elHeight = bb.bottom - bb.top;
-  
-  if (bb.top > 0 && bb.bottom < windowHeight) {
-    return 1;
-  } else if (bb.top > 0 && bb.top < windowHeight) {
-    const visiblePart = windowHeight - bb.top;
-    return visiblePart / elHeight;
-  } else if (bb.bottom > 0 & bb.bottom < windowHeight) {
-    const visiblePart = bb.bottom;
-    return visiblePart / elHeight;
-  }
-  return 0;
-};
-
-function checkElementsInView(els, inViewCallback) {
-  const windowHeight = window.innerHeight;
-  Array.prototype.forEach.call(els, (el) => {
-    const bb = el.getBoundingClientRect();
-    const coverage = calcCoverage(windowHeight, bb);
-    if (coverage > 0.2) {
-      inViewCallback(el);
-    }
-  });
-}
 
 function revealElement(el) {
   const delay = parseInt(el.dataset.srDelay) || 0;
@@ -87,7 +63,7 @@ function initializeSwiper(idName) {
     paginationClickable: true,
     spaceBetween: 0,
     mousewheelControl: true,
-    freeMode: true
+    freeMode: true,
   });
 }
 
@@ -98,11 +74,10 @@ function initializeSmoothScroll() {
     el.addEventListener('click', (e) => {
       if (target.charAt(0) === '#') {
         e.preventDefault();
-        TweenLite.to(
-          window,
-          1.2, 
-          { scrollTo: { y: target, offsetY: 30 }, ease: Power2.easeInOut }
-        );
+        TweenLite.to(window, 1.2, {
+          scrollTo: {y: target, offsetY: 30},
+          ease: Power2.easeInOut,
+        });
       }
     });
   });
@@ -125,9 +100,19 @@ function initializeLoadMoreButton() {
 }
 
 function initializeScrollReveal() {
-  checkElementsInView(scrollRevealEls, revealElement); // on startup
-  window.addEventListener('scroll', () => {
-    checkElementsInView(scrollRevealEls, revealElement);
+  const options = {
+    threshold: 0.4,
+    rootMargin: '0px',
+  };
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        revealElement(entry.target);
+      }
+    });
+  }, options);
+  Array.prototype.forEach.call(scrollRevealEls, (el) => {
+    observer.observe(el);
   });
 }
 
