@@ -145,9 +145,12 @@ function watch() {
   gulp.watch('src/**/*.js', scripts);
 }
 
-const buildAndWatch = gulp.series(styles, scripts, assets, html, watch);
+const buildAndWatch = gulp.series(
+  gulp.parallel(styles, scripts, assets, html),
+  watch
+);
 
-const build = gulp.series(styles, scripts, assets, html, vendorjs, vendorcss);
+const build = gulp.parallel(styles, scripts, assets, html, vendorjs, vendorcss);
 
 exports.default = buildAndWatch;
 exports.build = build;
