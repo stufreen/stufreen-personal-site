@@ -75,9 +75,27 @@ function initializeSmoothScroll() {
       if (target.charAt(0) === '#') {
         e.preventDefault();
         const targetId = target.substring(1);
-        document
-          .getElementById(targetId)
-          .scrollIntoView({ behavior: 'smooth' });
+        const targetEl = document.getElementById(targetId);
+
+        // Get the current scroll position
+        const startScrollY = document.body.scrollTop;
+        // Calculate the scroll position at the end of the page
+        const endScrollY = Math.min(
+          targetEl.offsetTop,
+          document.body.scrollHeight - window.innerHeight
+        );
+        // Calculate the total distance to scroll
+        const distance = endScrollY - startScrollY;
+
+        animol.ease(
+          (progress) => {
+            const scrollY = startScrollY + progress * distance;
+            console.log(scrollY);
+            window.scrollTo(0, scrollY);
+          },
+          2000,
+          animol.Easing.easeInOutQuint
+        );
       }
     });
   });

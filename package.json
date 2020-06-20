@@ -44,5 +44,7 @@
     "metalsmith-publish": "^0.1.5",
     "metalsmith-word-count": "0.0.4"
   },
-  "dependencies": {}
+  "dependencies": {
+    "animol": "^1.0.9"
+  }
 }
