@@ -83,8 +83,6 @@ function scrollToElement(target) {
   // Calculate the total distance to scroll
   const distance = endScrollY - startScrollY;
 
-  console.log(startScrollY, endScrollY);
-
   animol.ease(
     (progress) => {
       const scrollY = startScrollY + progress * distance;
