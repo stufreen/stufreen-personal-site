@@ -67,6 +67,28 @@ function initializeSwiper(idName) {
   });
 }
 
+function scrollToElement(target) {
+  // Get the current scroll position
+  const startScrollY = window.scrollY;
+  // Calculate the scroll position at the end of the page
+  const endScrollY = Math.min(
+    target.offsetTop - 20,
+    document.body.scrollHeight - window.innerHeight
+  );
+  // Calculate the total distance to scroll
+  const distance = endScrollY - startScrollY;
+
+  animol.ease(
+    (progress) => {
+      const scrollY = startScrollY + progress * distance;
+      console.log(scrollY);
+      window.scrollTo(0, scrollY);
+    },
+    1000,
+    animol.Easing.easeInOutCubic
+  );
+}
+
 function initializeSmoothScroll() {
   const smoothScrollLinks = document.getElementsByClassName('smooth-scroll');
   Array.prototype.forEach.call(smoothScrollLinks, (el) => {
@@ -76,26 +98,7 @@ function initializeSmoothScroll() {
         e.preventDefault();
         const targetId = target.substring(1);
         const targetEl = document.getElementById(targetId);
-
-        // Get the current scroll position
-        const startScrollY = document.body.scrollTop;
-        // Calculate the scroll position at the end of the page
-        const endScrollY = Math.min(
-          targetEl.offsetTop,
-          document.body.scrollHeight - window.innerHeight
-        );
-        // Calculate the total distance to scroll
-        const distance = endScrollY - startScrollY;
-
-        animol.ease(
-          (progress) => {
-            const scrollY = startScrollY + progress * distance;
-            console.log(scrollY);
-            window.scrollTo(0, scrollY);
-          },
-          2000,
-          animol.Easing.easeInOutQuint
-        );
+        scrollToElement(targetEl);
       }
     });
   });
