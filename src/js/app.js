@@ -68,6 +68,11 @@ function initializeSwiper(idName) {
 }
 
 function scrollToElement(target) {
+  if (typeof window.scrollY === 'undefined') {
+    target.scrollIntoView();
+    return;
+  }
+
   // Get the current scroll position
   const startScrollY = window.scrollY;
   // Calculate the scroll position at the end of the page
@@ -78,10 +83,11 @@ function scrollToElement(target) {
   // Calculate the total distance to scroll
   const distance = endScrollY - startScrollY;
 
+  console.log(startScrollY, endScrollY);
+
   animol.ease(
     (progress) => {
       const scrollY = startScrollY + progress * distance;
-      console.log(scrollY);
       window.scrollTo(0, scrollY);
     },
     1000,
@@ -121,6 +127,14 @@ function initializeLoadMoreButton() {
 }
 
 function initializeScrollReveal() {
+  // Fall back for old browsers
+  if (typeof IntersectionObserver === 'undefined') {
+    Array.prototype.forEach.call(scrollRevealEls, (el) => {
+      revealElement(el);
+    });
+    return;
+  }
+
   const options = {
     threshold: 0.4,
     rootMargin: '0px',
