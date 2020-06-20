@@ -74,10 +74,10 @@ function initializeSmoothScroll() {
     el.addEventListener('click', (e) => {
       if (target.charAt(0) === '#') {
         e.preventDefault();
-        TweenLite.to(window, 1.2, {
-          scrollTo: {y: target, offsetY: 30},
-          ease: Power2.easeInOut,
-        });
+        const targetId = target.substring(1);
+        document
+          .getElementById(targetId)
+          .scrollIntoView({ behavior: 'smooth' });
       }
     });
   });

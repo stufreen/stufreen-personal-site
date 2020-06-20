@@ -14,8 +14,6 @@
   "unused": true,
   "eqnull": true,
   "globals": {
-    "Swiper": true,
-    "TweenLite": true,
-    "Power2": true
+    "Swiper": true
   }
 }
