@@ -1,6 +1,6 @@
 {
   "name": "stufreen2",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Static site generator version of Stu Freen website",
   "main": "index.html",
   "scripts": {
